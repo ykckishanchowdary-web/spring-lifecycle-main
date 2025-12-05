@@ -27,4 +27,13 @@ public class PieShopApplication {
             pieService.bake();
         };
     }
+
+
+    @Bean
+    CommandLineRunner demo4(ApplicationContext ctx){
+        return args -> {
+            Bakery bakery = ctx.getBean(Bakery.class);
+            bakery.openShop();
+        };
+    }
 }

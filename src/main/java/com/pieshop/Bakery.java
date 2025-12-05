@@ -2,6 +2,7 @@ package com.pieshop;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -9,17 +10,22 @@ import org.springframework.stereotype.Component;
 @DependsOn("oven")
 public class Bakery {
     
-    private final List<Baker> bakers;
+    private final Baker baker;
 
-    public Bakery(List<Baker> bakers){
-        this.bakers = bakers;
+    public Bakery(@Qualifier("juniorBaker")Baker baker){
+        this.baker = baker;
         System.out.println("Bakery is open!");
         startBaking();
     }
 
+    public void openShop(){
+        System.out.println("Bakery is open!");
+        baker.bake();
+    }
+
     private void startBaking(){
         System.out.println("Bakery is starting the baking process...");
-        bakers.forEach(Baker::bake);
+        baker.bake();
     }
 
 
